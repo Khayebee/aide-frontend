@@ -152,5 +152,41 @@ Class AnnouncementDashboardUpdatePage
             Return ex
         End Try
     End Function
+
+    Private Sub btnAnnouncementDelete_Click(sender As Object, e As RoutedEventArgs)
+        Try
+            InitializeService()
+
+            If MsgBox("Are you sure you want to continue? Announcement will be removed from the lists.", vbYesNo, "AIDE") = vbYes Then
+                Me.DataContext = announcementModel.ObjectAnnouncement
+                _announce = getDataUpdate(Me.DataContext)
+                aide.DeleteAnnouncements(_announce.ANNOUNCEMENT_ID)
+
+                _announce.ANNOUNCEMENT_ID = Nothing
+                _announce.TITLE = Nothing
+                _announce.MESSAGE = Nothing
+                _announce.END_DATE = Nothing
+                _announce.EMP_ID = Nothing
+
+                mainframe.Navigate(New HomePage(mainframe, profile.Position, empID, addframe, menugrid, submenuframe, email, profile))
+                mainframe.IsEnabled = True
+                mainframe.Opacity = 1
+                menugrid.IsEnabled = True
+                menugrid.Opacity = 1
+                submenuframe.IsEnabled = True
+                submenuframe.Opacity = 1
+
+                addframe.Visibility = Visibility.Hidden
+                MsgBox("Successfully removed!", vbOKOnly + MsgBoxStyle.Information, "AIDE")
+            Else
+                Exit Sub
+            End If
+        Catch ex As Exception
+            If MsgBox(ex.Message + " Do you wish to exit?", vbYesNo + vbCritical, "AIDE") = vbYes Then
+                Environment.Exit(0)
+            Else
+            End If
+        End Try
+    End Sub
 End Class
 

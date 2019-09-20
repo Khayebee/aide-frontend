@@ -129,10 +129,31 @@
                     </Grid>
 
                     <Grid Grid.Row="2">
+                        <Grid Margin="0,0,10,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0" Grid.Row="2">
+                                <Button Style="{DynamicResource RoundCornerUpdate}" x:Name="btnAnnouncementUpdate" Margin="5,5,5,10" HorizontalAlignment="Stretch" Click="btnAnnouncementUpdate_Click">
+                                    <TextBlock Text="UPDATE" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
+                                </Button>
+                            </Grid>
+
+                            <Grid Grid.Column="1" Grid.Row="2">
+                                <Button Style="{DynamicResource RoundCornerDelete}" x:Name="btnAnnouncementDelete" Margin="5,5,5,10" HorizontalAlignment="Stretch" Click="btnAnnouncementDelete_Click">
+                                    <TextBlock Text="REMOVE" TextWrapping="Wrap" Margin="5"/>
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
+                    <!--<Grid Grid.Row="2">
                         <Button Style="{DynamicResource RoundCornerUpdate}" x:Name="btnAnnouncementUpdate" Margin="5,5,10,10" HorizontalAlignment="Stretch" Click="btnAnnouncementUpdate_Click">
                             <TextBlock Text="UPDATE" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"/>
                         </Button>
-                    </Grid>
+                    </Grid>-->
                 </Grid>
             </Grid>
         </Grid>

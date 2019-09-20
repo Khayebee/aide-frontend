@@ -8492,6 +8492,12 @@ Namespace ServiceReference1
      System.ServiceModel.ServiceContractAttribute(ConfigurationName:="ServiceReference1.IAideService", CallbackContract:=GetType(ServiceReference1.IAideServiceCallback), SessionMode:=System.ServiceModel.SessionMode.Required)>  _
     Public Interface IAideService
         
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IAideService/GetWeeklyReportsByWeekRangeID", ReplyAction:="http://tempuri.org/IAideService/GetWeeklyReportsByWeekRangeIDResponse")>  _
+        Function GetWeeklyReportsByWeekRangeID(ByVal weekRangeID As Integer, ByVal empID As Integer) As ServiceReference1.WeeklyReport()
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IAideService/GetWeeklyReportsByWeekRangeID", ReplyAction:="http://tempuri.org/IAideService/GetWeeklyReportsByWeekRangeIDResponse")>  _
+        Function GetWeeklyReportsByWeekRangeIDAsync(ByVal weekRangeID As Integer, ByVal empID As Integer) As System.Threading.Tasks.Task(Of ServiceReference1.WeeklyReport())
+        
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IAideService/GetTasksDataByEmpID", ReplyAction:="http://tempuri.org/IAideService/GetTasksDataByEmpIDResponse")>  _
         Function GetTasksDataByEmpID(ByVal weekRangeID As Integer, ByVal empID As Integer) As ServiceReference1.WeeklyReport()
         
@@ -8870,6 +8876,12 @@ Namespace ServiceReference1
         <System.ServiceModel.OperationContractAttribute(IsOneWay:=true, Action:="http://tempuri.org/IAideService/UpdateAnnouncements")>  _
         Function UpdateAnnouncementsAsync(ByVal announcements As ServiceReference1.Announcements) As System.Threading.Tasks.Task
         
+        <System.ServiceModel.OperationContractAttribute(IsOneWay:=true, Action:="http://tempuri.org/IAideService/DeleteAnnouncements")>  _
+        Sub DeleteAnnouncements(ByVal announcementsID As Integer)
+        
+        <System.ServiceModel.OperationContractAttribute(IsOneWay:=true, Action:="http://tempuri.org/IAideService/DeleteAnnouncements")>  _
+        Function DeleteAnnouncementsAsync(ByVal announcementsID As Integer) As System.Threading.Tasks.Task
+        
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IAideService/GetLate", ReplyAction:="http://tempuri.org/IAideService/GetLateResponse")>  _
         Function GetLate(ByVal empID As Integer, ByVal month As Integer, ByVal year As Integer, ByVal toDisplay As Integer) As ServiceReference1.Late()
         
@@ -8977,12 +8989,6 @@ Namespace ServiceReference1
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IAideService/GetWeeklyReportsByEmpID", ReplyAction:="http://tempuri.org/IAideService/GetWeeklyReportsByEmpIDResponse")>  _
         Function GetWeeklyReportsByEmpIDAsync(ByVal empID As Integer, ByVal month As Integer, ByVal year As Integer) As System.Threading.Tasks.Task(Of ServiceReference1.WeekRange())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IAideService/GetWeeklyReportsByWeekRangeID", ReplyAction:="http://tempuri.org/IAideService/GetWeeklyReportsByWeekRangeIDResponse")>  _
-        Function GetWeeklyReportsByWeekRangeID(ByVal weekRangeID As Integer, ByVal empID As Integer) As ServiceReference1.WeeklyReport()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IAideService/GetWeeklyReportsByWeekRangeID", ReplyAction:="http://tempuri.org/IAideService/GetWeeklyReportsByWeekRangeIDResponse")>  _
-        Function GetWeeklyReportsByWeekRangeIDAsync(ByVal weekRangeID As Integer, ByVal empID As Integer) As System.Threading.Tasks.Task(Of ServiceReference1.WeeklyReport())
         
         <System.ServiceModel.OperationContractAttribute(IsOneWay:=true, Action:="http://tempuri.org/IAideService/InsertActionList")>  _
         Sub InsertActionList(ByVal _Action As ServiceReference1.Action)
@@ -9509,6 +9515,14 @@ Namespace ServiceReference1
             MyBase.New(callbackInstance, binding, remoteAddress)
         End Sub
         
+        Public Function GetWeeklyReportsByWeekRangeID(ByVal weekRangeID As Integer, ByVal empID As Integer) As ServiceReference1.WeeklyReport() Implements ServiceReference1.IAideService.GetWeeklyReportsByWeekRangeID
+            Return MyBase.Channel.GetWeeklyReportsByWeekRangeID(weekRangeID, empID)
+        End Function
+        
+        Public Function GetWeeklyReportsByWeekRangeIDAsync(ByVal weekRangeID As Integer, ByVal empID As Integer) As System.Threading.Tasks.Task(Of ServiceReference1.WeeklyReport()) Implements ServiceReference1.IAideService.GetWeeklyReportsByWeekRangeIDAsync
+            Return MyBase.Channel.GetWeeklyReportsByWeekRangeIDAsync(weekRangeID, empID)
+        End Function
+        
         Public Function GetTasksDataByEmpID(ByVal weekRangeID As Integer, ByVal empID As Integer) As ServiceReference1.WeeklyReport() Implements ServiceReference1.IAideService.GetTasksDataByEmpID
             Return MyBase.Channel.GetTasksDataByEmpID(weekRangeID, empID)
         End Function
@@ -10013,6 +10027,14 @@ Namespace ServiceReference1
             Return MyBase.Channel.UpdateAnnouncementsAsync(announcements)
         End Function
         
+        Public Sub DeleteAnnouncements(ByVal announcementsID As Integer) Implements ServiceReference1.IAideService.DeleteAnnouncements
+            MyBase.Channel.DeleteAnnouncements(announcementsID)
+        End Sub
+        
+        Public Function DeleteAnnouncementsAsync(ByVal announcementsID As Integer) As System.Threading.Tasks.Task Implements ServiceReference1.IAideService.DeleteAnnouncementsAsync
+            Return MyBase.Channel.DeleteAnnouncementsAsync(announcementsID)
+        End Function
+        
         Public Function GetLate(ByVal empID As Integer, ByVal month As Integer, ByVal year As Integer, ByVal toDisplay As Integer) As ServiceReference1.Late() Implements ServiceReference1.IAideService.GetLate
             Return MyBase.Channel.GetLate(empID, month, year, toDisplay)
         End Function
@@ -10155,14 +10177,6 @@ Namespace ServiceReference1
         
         Public Function GetWeeklyReportsByEmpIDAsync(ByVal empID As Integer, ByVal month As Integer, ByVal year As Integer) As System.Threading.Tasks.Task(Of ServiceReference1.WeekRange()) Implements ServiceReference1.IAideService.GetWeeklyReportsByEmpIDAsync
             Return MyBase.Channel.GetWeeklyReportsByEmpIDAsync(empID, month, year)
-        End Function
-        
-        Public Function GetWeeklyReportsByWeekRangeID(ByVal weekRangeID As Integer, ByVal empID As Integer) As ServiceReference1.WeeklyReport() Implements ServiceReference1.IAideService.GetWeeklyReportsByWeekRangeID
-            Return MyBase.Channel.GetWeeklyReportsByWeekRangeID(weekRangeID, empID)
-        End Function
-        
-        Public Function GetWeeklyReportsByWeekRangeIDAsync(ByVal weekRangeID As Integer, ByVal empID As Integer) As System.Threading.Tasks.Task(Of ServiceReference1.WeeklyReport()) Implements ServiceReference1.IAideService.GetWeeklyReportsByWeekRangeIDAsync
-            Return MyBase.Channel.GetWeeklyReportsByWeekRangeIDAsync(weekRangeID, empID)
         End Function
         
         Public Sub InsertActionList(ByVal _Action As ServiceReference1.Action) Implements ServiceReference1.IAideService.InsertActionList
