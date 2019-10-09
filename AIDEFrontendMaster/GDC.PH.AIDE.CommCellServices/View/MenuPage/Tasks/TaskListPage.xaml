@@ -83,6 +83,7 @@
                             <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}" Header="Status" Width="100" Binding="{Binding StatusDesc}" />
                         </DataGrid.Columns>
                     </DataGrid>
+                    
                 </Border>
             </Grid>
             
